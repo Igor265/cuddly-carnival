@@ -18,3 +18,18 @@ it('should be able to open a question to edit', function () {
     // Assert
     $response->assertSuccessful();
 });
+
+it('should return a view', function () {
+    // Arrange
+    $user     = User::factory()->create();
+    $question = Question::factory()
+        ->for($user, 'createdBy')
+        ->create();
+    actingAs($user);
+
+    // Act
+    $response = get(route('question.edit', $question->id));
+
+    // Assert
+    $response->assertViewIs('question.edit');
+});
