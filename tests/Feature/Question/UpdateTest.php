@@ -15,7 +15,7 @@ it('should update the question', function () {
     // Act
     put(route('question.update', $question->id), [
         'question' => 'Updated question?',
-    ]);
+    ])->assertRedirect();
 
     $question->refresh();
 
